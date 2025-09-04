@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ThinZar</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+<style>
+/* Main Body and Background */
+body {
+    background: linear-gradient(to bottom, #28a745, #FFFFFF);
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    font-family: sans-serif;
+    padding-top: 56px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+.navbar {
+    background-color: #28a745;
+}
+
+/* Currency Converter Card */
+.converter-card {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 350px;
+    text-align: center;
+}
+.converter-card h2 {
+    margin-bottom: 20px;
+}
+.converter-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+.currency-box {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48%;
+}
+.currency-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.flag-icon {
+    width: 30px;
+    height: 20px;
+    margin-right: 10px;
+}
+.currency-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+/* Exchange Rate Display */
+.rate-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.rate-display img {
+    width: 30px;
+    height: 20px;
+    margin: 0 5px;
+}
+.rate-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Social Buttons Container */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 350px;
+}
+.social-buttons .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+.social-buttons .btn-messenger {
+    background-color: #0078FF;
+}
+.social-buttons .btn-facebook {
+    background-color: #1877F2;
+}
+.social-buttons .btn i {
+    margin-right: 8px;
+}
+
+/* New: Side-by-side input container */
+.input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* New: Logo Style */
+.converter-logo {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar fixed-top bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">𝐓𝐡𝐢𝐧 𝐙𝐚𝐫 ထိုင်း_မြန်မာ ငွေလွှဲဝင်ဆောင်မှူ့</a>
+  </div>
+</nav>
+
+<div class="converter-card">
+    <img "https://raw.githubusercontent.com/Pkvipvpn/Thinzarweb/refs/heads/main/thinzar.png" alt="Currency Logo" class="converter-logo">
+    
+    <div class="rate-display">
+        <img src="https://flagcdn.com/mm.svg" alt="Myanmar Flag">
+        <span class="rate-text">100,000 MMK</span>
+        <span class="material-icons mx-2">arrow_forward</span>
+        <span class="rate-text">750 THB</span>
+        <img src="https://flagcdn.com/th.svg" alt="Thailand Flag">
+    </div>
+    
+    <div class="input-container">
+        <div class="currency-box">
+            <div class="currency-info">
+                <img src="https://flagcdn.com/mm.svg" class="flag-icon" alt="Myanmar Flag">
+                <span class="currency-text">မြန်မာကျပ် (MMK)</span>
+            </div>
+            <input type="number" id="mmkInput" class="converter-input" placeholder="ပမာဏထည့်ပါ" oninput="convertFromMmk()">
+            <span id="mmkOutput" class="mt-2 text-muted"></span>
+        </div>
+        
+        <div class="currency-box">
+            <div class="currency-info">
+                <img src="https://flagcdn.com/th.svg" class="flag-icon" alt="Thailand Flag">
+                <span class="currency-text">ထိုင်းဘတ် (THB)</span>
+            </div>
+            <input type="number" id="thbInput" class="converter-input" placeholder="ပမာဏထည့်ပါ" oninput="convertFromThb()">
+            <span id="thbOutput" class="mt-2 text-muted"></span>
+        </div>
+    </div>
+</div>
+
+<div class="social-buttons">
+    <a href="https://m.me/upkvpnfastvpn" class="btn btn-messenger" target="_blank">
+        <i class="fa fa-comment"></i> Messenger သို့
+    </a>
+    <a href="https://www.facebook.com/upkvpnfastvpn" class="btn btn-facebook" target="_blank">
+        <i class="fa fa-facebook-square"></i> Facebook Page
+    </a>
+</div>
+
+<script>
+    const exchangeRate = 0.0075; // 1 MMK = 0.0075 THB
+
+    function convertFromMmk() {
+        const mmkInput = document.getElementById("mmkInput");
+        const thbInput = document.getElementById("thbInput");
+        const mmkOutput = document.getElementById("mmkOutput");
+        const thbOutput = document.getElementById("thbOutput");
+
+        const mmkAmount = parseFloat(mmkInput.value);
+        
+        if (!isNaN(mmkAmount) && mmkAmount > 0) {
+            const thbResult = (mmkAmount * exchangeRate).toFixed(2);
+            thbInput.value = thbResult;
+            mmkOutput.innerText = `${mmkAmount} MMK`;
+            thbOutput.innerText = `${thbResult} THB`;
+        } else {
+            thbInput.value = "";
+            mmkOutput.innerText = "";
+            thbOutput.innerText = "";
+        }
+    }
+
+    function convertFromThb() {
+        const mmkInput = document.getElementById("mmkInput");
+        const thbInput = document.getElementById("thbInput");
+        const mmkOutput = document.getElementById("mmkOutput");
+        const thbOutput = document.getElementById("thbOutput");
+
+        const thbAmount = parseFloat(thbInput.value);
+        
+        if (!isNaN(thbAmount) && thbAmount > 0) {
+            const mmkResult = (thbAmount / exchangeRate).toFixed(2);
+            mmkInput.value = mmkResult;
+            mmkOutput.innerText = `${mmkResult} MMK`;
+            thbOutput.innerText = `${thbAmount} THB`;
+        } else {
+            mmkInput.value = "";
+            mmkOutput.innerText = "";
+            thbOutput.innerText = "";
+        }
+    }
+</script>
+
+</body>
+</html>
