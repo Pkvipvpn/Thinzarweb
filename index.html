@@ -135,6 +135,30 @@ body {
     height: auto;
     margin-bottom: 10px;
 }
+
+/* New: Scrolling Text */
+.scrolling-text-container {
+    width: 100%;
+    overflow: hidden; /* စာသားတွေကို ဘောင်အပြင်မထွက်အောင် လုပ်ပေးပါတယ် */
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+.scrolling-text {
+    display: inline-block;
+    padding-left: 100%;
+    white-space: nowrap;
+    animation: scroll-left 28s linear infinite;
+    font-weight: bold;
+    color: #d9534f;
+}
+/* Animation Keyframes */
+@keyframes scroll-left {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
 </style>
 </head>
 
@@ -147,6 +171,12 @@ body {
 
 <div class="converter-card">
     <img src="https://raw.githubusercontent.com/Pkvipvpn/Thinzarweb/main/thinzar.png" class="app-logo" alt="UPK FAST VPN PRO Icon">
+
+    <div class="scrolling-text-container">
+        <div class="scrolling-text">
+            မင်္ဂလာပါ! Thin Zar ၏ ဝန်ဆောင်မှုများကို ယုံကြည်စိတ်ချစွာ အားပေးတဲ့အတွက် တျောက်ချင်းစီတိုင်ကို အထူးကျေးဇူးတင်ပါသည်! မိတ်ဆွေများ စိတ်ချမ်းသာ!ကိုယ်ကျန်းမာ ရှိ့ကျပါစေဟု့ Thin Zar မှ အမြဲဆု့တောင်း​မေတ္တာ ပေးပို့ပါသည်🙏🙏🙏
+        </div>
+    </div>
 
     <div class="rate-display">
         <img src="https://flagcdn.com/mm.svg" alt="Myanmar Flag">
@@ -179,7 +209,7 @@ body {
 
 <div class="social-buttons">
     <a href="https://m.me/thinzar.oo.523862" class="btn btn-messenger" target="_blank">
-        <i class="fa fa-comment"></i> Messenger သို့
+        <i class="fa fa-comment"></i> ThiZarနှင့်ငွေလွှဲမည်
     </a>
     <a href="https://www.facebook.com/share/19zCTH2Szb/" class="btn btn-facebook" target="_blank">
         <i class="fa fa-facebook-square"></i> Facebook Page
@@ -189,23 +219,17 @@ body {
 <script src="config.js"></script>
 
 <script>
-    // ဒီမှာဆိုရင် config.js ထဲက thbEquivalentFor100k ကို အသုံးပြုနိုင်ပါပြီ
     const exchangeRate = thbEquivalentFor100k / 100000;
-    
-    // display မှာ ပြသဖို့အတွက် baseMMK တန်ဖိုးကို သတ်မှတ်ပါ။
     const baseMMK = 100000;
     
-    // ငွေလဲနှုန်းကို စာမျက်နှာမှာ ပြသပေးမယ့် function
     function updateRateDisplay() {
         const baseTHB = (baseMMK * exchangeRate).toFixed(2);
         document.getElementById("mmkRateDisplay").innerText = `${baseMMK.toLocaleString()} MMK`;
         document.getElementById("thbRateDisplay").innerText = `${baseTHB} THB`;
     }
 
-    // စာမျက်နှာကို စတင်ဖွင့်တဲ့အခါ ငွေလဲနှုန်းပြသဖို့ ဒီ function ကို ခေါ်ပါ။
     window.onload = updateRateDisplay;
 
-    // Conversion functions
     function convertFromMmk() {
         const mmkInput = document.getElementById("mmkInput");
         const thbInput = document.getElementById("thbInput");
