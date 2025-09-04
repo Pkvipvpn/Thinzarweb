@@ -135,7 +135,6 @@ body {
     height: auto;
     margin-bottom: 10px;
 }
-
 </style>
 </head>
 
@@ -147,13 +146,13 @@ body {
 </nav>
 
 <div class="converter-card">
-    <img src="https://raw.githubusercontent.com/Pkvipvpn/Thinzarweb/refs/heads/main/thinzar.png" class="app-logo" alt="UPK FAST VPN PRO Icon">
+    <img src="https://raw.githubusercontent.com/Pkvipvpn/Thinzarweb/main/thinzar.png" class="app-logo" alt="UPK FAST VPN PRO Icon">
 
     <div class="rate-display">
         <img src="https://flagcdn.com/mm.svg" alt="Myanmar Flag">
-        <span class="rate-text">100,000 MMK</span>
+        <span class="rate-text" id="mmkRateDisplay"></span>
         <span class="material-icons mx-2">arrow_forward</span>
-        <span class="rate-text">750 THB</span>
+        <span class="rate-text" id="thbRateDisplay"></span>
         <img src="https://flagcdn.com/th.svg" alt="Thailand Flag">
     </div>
     
@@ -187,13 +186,26 @@ body {
     </a>
 </div>
 
-
-    </a>
-</div>
+<script src="config.js"></script>
 
 <script>
-    const exchangeRate = 0.0075; // 1 MMK = 0.0075 THB
+    // ဒီမှာဆိုရင် config.js ထဲက thbEquivalentFor100k ကို အသုံးပြုနိုင်ပါပြီ
+    const exchangeRate = thbEquivalentFor100k / 100000;
+    
+    // display မှာ ပြသဖို့အတွက် baseMMK တန်ဖိုးကို သတ်မှတ်ပါ။
+    const baseMMK = 100000;
+    
+    // ငွေလဲနှုန်းကို စာမျက်နှာမှာ ပြသပေးမယ့် function
+    function updateRateDisplay() {
+        const baseTHB = (baseMMK * exchangeRate).toFixed(2);
+        document.getElementById("mmkRateDisplay").innerText = `${baseMMK.toLocaleString()} MMK`;
+        document.getElementById("thbRateDisplay").innerText = `${baseTHB} THB`;
+    }
 
+    // စာမျက်နှာကို စတင်ဖွင့်တဲ့အခါ ငွေလဲနှုန်းပြသဖို့ ဒီ function ကို ခေါ်ပါ။
+    window.onload = updateRateDisplay;
+
+    // Conversion functions
     function convertFromMmk() {
         const mmkInput = document.getElementById("mmkInput");
         const thbInput = document.getElementById("thbInput");
@@ -205,7 +217,7 @@ body {
         if (!isNaN(mmkAmount) && mmkAmount > 0) {
             const thbResult = (mmkAmount * exchangeRate).toFixed(2);
             thbInput.value = thbResult;
-            mmkOutput.innerText = `${mmkAmount} MMK`;
+            mmkOutput.innerText = `${mmkAmount.toLocaleString()} MMK`;
             thbOutput.innerText = `${thbResult} THB`;
         } else {
             thbInput.value = "";
