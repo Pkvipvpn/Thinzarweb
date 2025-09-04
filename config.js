@@ -1,1 +1,1 @@
-const thbEquivalentFor100k = 763;
+const thbEquivalentFor100k = 764;
